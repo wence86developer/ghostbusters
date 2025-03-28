@@ -10,7 +10,7 @@ const useFetch = (endpoint, query) => {
     const [error, setError] = useState(null);
 
     const options = {
-        method: 'GET',
+        method: 'GET', 
         url: `https://jsearch.p.rapidapi.com/${endpoint}`,
         headers: {
             'x-rapidapi-key': 'b8dfa95298mshe61001e2430350ep101a2cjsnf416ab9f0b63',
@@ -23,13 +23,14 @@ const useFetch = (endpoint, query) => {
         setIsLoading(true);
 
         try {
-            const response = await axios.request
-            (options);
+            const response = await axios.request(options);
+            console.log(response.data);
 
             setData(response.data.data);
             setIsLoading(false);
         } catch (error) {
             setError(error);
+            console.log(error)
             //alert('There is an error')
         } finally {
             setIsLoading(false);
@@ -44,9 +45,9 @@ const useFetch = (endpoint, query) => {
     const refetch = () => {
         setIsLoading(true);
         fetchData();
-    }
+    };
 
     return { data, isLoading, error, refetch };
-}
+};
 
 export default useFetch;
